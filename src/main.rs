@@ -1,9 +1,12 @@
+use engine::Engine;
+
 mod engine;
 mod interface;
 
 fn main() {
-    
-    loop {
+    let engine = Engine::new();
 
+    loop {
+        
     }
 }
