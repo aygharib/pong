@@ -12,7 +12,14 @@ impl Interface {
     }
 
     pub fn draw(&self) {
+        for _ in 0..81 {
+            print!("-");
+        }
+
+        println!();
+
         for row in self.engine.map {
+            print!("|");
             for ele in row {
                 if ele == false {
                     print!(" ");
@@ -20,8 +27,14 @@ impl Interface {
                     print!("X");
                 }
             }
-            println!("");
+            print!("|");
+            println!();
         }
+
+        for _ in 0..81 {
+            print!("-");
+        }
+        println!();
     }
 
     pub fn clear(&self) {
