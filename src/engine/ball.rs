@@ -1,5 +1,3 @@
-// use self::math::Vector2;
-
 use crate::engine::math::Vector2;
 
 pub struct Ball {
