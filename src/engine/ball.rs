@@ -19,7 +19,7 @@ impl Ball {
 
     pub fn update(&mut self) {
         self.position.x += self.direction.x * SPEED;
-        self.position.y += self.direction.y * SPEED;
+        self.position.y -= self.direction.y * SPEED;
     }
 
     pub fn bounce_off_wall(&mut self) {

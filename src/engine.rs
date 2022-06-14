@@ -20,8 +20,8 @@ impl Engine {
     pub fn new() -> Self {
         Self {
             left_paddle: Paddle::new(Vector2::new(0, (MAP_HEIGHT/2+1) as i32), 1, 4),
-            right_paddle: Paddle::new(Vector2::new((MAP_WIDTH-1) as i32, (MAP_HEIGHT/2) as i32), 1, 4),
-            ball: Ball::new(Vector2::new((MAP_WIDTH/2) as i32, (MAP_HEIGHT/2) as i32), Vector2::new(1, 1), 2),
+            right_paddle: Paddle::new(Vector2::new((MAP_WIDTH-1) as i32, (MAP_HEIGHT/2+3) as i32), 1, 2),
+            ball: Ball::new(Vector2::new((MAP_WIDTH/2) as i32, (MAP_HEIGHT/2) as i32), Vector2::new(1, -1), 2),
             map: [[false; MAP_WIDTH]; MAP_HEIGHT],
         }
     }
@@ -55,8 +55,8 @@ impl Engine {
     }
 
     pub fn ball_is_next_to_paddle(&self) -> bool {
-        let l = self.ball.position.x == self.left_paddle.position.x + 1 && self.ball.position.y == self.left_paddle.position.y;
-        let r = self.ball.position.x == self.right_paddle.position.x - 1 && self.ball.position.y == self.right_paddle.position.y;
+        let l = self.ball.position.x == self.left_paddle.position.x + 1 && (self.ball.position.y >= self.left_paddle.position.y && self.ball.position.y <= (self.left_paddle.position.y + self.left_paddle.height-1));
+        let r = self.ball.position.x == self.right_paddle.position.x - 1 && (self.ball.position.y >= self.right_paddle.position.y && self.ball.position.y <= (self.right_paddle.position.y + self.right_paddle.height-1));
 
         r || l
     }

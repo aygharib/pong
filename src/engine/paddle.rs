@@ -1,7 +1,7 @@
 use crate::engine::math::Vector2;
 
 pub struct Paddle {
-    pub position: Vector2,
+    pub position: Vector2, // represents the top square of the paddle
     width: i32,
     pub height: i32,
 }
