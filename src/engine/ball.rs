@@ -22,7 +22,11 @@ impl Ball {
         self.position.y += self.direction.y * SPEED;
     }
 
-    pub fn flip(&mut self) {
+    pub fn bounce_off_wall(&mut self) {
         self.direction.y *= -1
+    }
+
+    pub fn bounce_off_paddle(&mut self) {
+        self.direction.x *= -1
     }
 }

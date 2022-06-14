@@ -5,7 +5,7 @@ use std::{thread, time};
 mod engine;
 mod interface;
 
-const SLEEP_TIME: u64 = 1000;
+const SLEEP_TIME: u64 = 100;
 
 fn main() {
     let mut engine = Engine::new();
