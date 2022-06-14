@@ -21,7 +21,7 @@ impl Engine {
         Self {
             left_paddle: Paddle::new(Vector2::new(0, 5), 1, 4),
             right_paddle: Paddle::new(Vector2::new(79, 5), 1, 4),
-            ball: Ball::new(Vector2::new(40, 4), Vector2::new(1, 1), 2),
+            ball: Ball::new(Vector2::new(40, 4), Vector2::new(1, 0), 2),
             map: [[false; MAP_WIDTH]; MAP_HEIGHT],
         }
     }
