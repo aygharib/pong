@@ -12,34 +12,45 @@ impl Interface {
     }
 
     pub fn draw(&self) {
-        for _ in 0..81 {
-            print!("-");
+        let mut final_drawn_map = String::new();
+        final_drawn_map.push_str("+");
+
+        for _ in 0..crate::MAP_WIDTH {
+            final_drawn_map.push_str("-");
         }
 
-        println!();
+        final_drawn_map.push_str("+");
+        final_drawn_map.push_str("\n");
 
         for row in self.engine.map {
-            print!("|");
+            final_drawn_map.push_str("|");
             for ele in row {
                 if ele == false {
-                    print!(" ");
+                    final_drawn_map.push_str(" ");
                 } else {
-                    print!("X");
+                    final_drawn_map.push_str("X");
                 }
             }
-            print!("|");
-            println!();
+            final_drawn_map.push_str("|");
+            final_drawn_map.push_str("\n");
         }
 
-        for _ in 0..81 {
-            print!("-");
+        final_drawn_map.push_str("+");
+        for _ in 0..crate::MAP_WIDTH {
+            final_drawn_map.push_str("-");
         }
-        println!();
+        final_drawn_map.push_str("+");
+        final_drawn_map.push_str("\n");
+
+        print!("{}", final_drawn_map);
     }
 
     pub fn clear(&self) {
+        let mut final_clear = String::new();
         for _ in 0..25 {
-            println!("\n");
+            final_clear.push_str("\n");
         }
+
+        print!("{}", final_clear);
     }
 }

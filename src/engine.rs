@@ -6,23 +6,20 @@ mod paddle;
 mod ball;
 mod math;
 
-const MAP_WIDTH: usize = 80;
-const MAP_HEIGHT: usize = 10;
-
 pub struct Engine {
     left_paddle: Paddle,
     right_paddle: Paddle,
     ball: Ball,
-    pub map: [[bool; MAP_WIDTH]; MAP_HEIGHT],
+    pub map: [[bool; crate::MAP_WIDTH]; crate::MAP_HEIGHT],
 }
 
 impl Engine {
     pub fn new() -> Self {
         Self {
-            left_paddle: Paddle::new(Vector2::new(0, (MAP_HEIGHT/2+1) as i32), 1, 4),
-            right_paddle: Paddle::new(Vector2::new((MAP_WIDTH-1) as i32, (MAP_HEIGHT/2+3) as i32), 1, 2),
-            ball: Ball::new(Vector2::new((MAP_WIDTH/2) as i32, (MAP_HEIGHT/2) as i32), Vector2::new(1, -1), 2),
-            map: [[false; MAP_WIDTH]; MAP_HEIGHT],
+            left_paddle: Paddle::new(Vector2::new(0, (crate::MAP_HEIGHT/2) as i32), 1, 4),
+            right_paddle: Paddle::new(Vector2::new((crate::MAP_WIDTH-1) as i32, (crate::MAP_HEIGHT/2) as i32), 1, 4),
+            ball: Ball::new(Vector2::new((crate::MAP_WIDTH/2) as i32, (crate::MAP_HEIGHT/2) as i32), Vector2::new(1, -1), 2),
+            map: [[false; crate::MAP_WIDTH]; crate::MAP_HEIGHT],
         }
     }
 
@@ -41,7 +38,7 @@ impl Engine {
             self.ball.bounce_off_paddle();
         }
 
-        self.map = [[false; MAP_WIDTH]; MAP_HEIGHT];
+        self.map = [[false; crate::MAP_WIDTH]; crate::MAP_HEIGHT];
 
         for i in self.left_paddle.position.y .. self.left_paddle.position.y+self.left_paddle.height {
             self.map[i as usize][self.left_paddle.position.x as usize] = true;
@@ -55,7 +52,7 @@ impl Engine {
     }
 
     pub fn ball_is_next_to_wall(&self) -> bool {
-        self.ball.position.y == 0 || self.ball.position.y == (MAP_HEIGHT-1) as i32
+        self.ball.position.y == 0 || self.ball.position.y == (crate::MAP_HEIGHT-1) as i32
     }
 
     pub fn ball_is_next_to_paddle(&self) -> bool {
@@ -66,6 +63,6 @@ impl Engine {
     }
 
     pub fn ball_has_scored(&self) -> bool {
-        self.ball.position.x == 0 || self.ball.position.x == (MAP_WIDTH as i32)
+        self.ball.position.x == 0 || self.ball.position.x == (crate::MAP_WIDTH as i32)
     }
 }

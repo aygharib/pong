@@ -31,8 +31,8 @@ impl Ball {
     }
 
     pub fn reset(&mut self) {
-        self.position.x = 40;
-        self.position.y = 5;
+        self.position.x = (crate::MAP_WIDTH as i32)/2;
+        self.position.y = (crate::MAP_HEIGHT as i32)/2;
         self.bounce_off_paddle();
     }
 }

@@ -7,6 +7,9 @@ mod interface;
 
 const SLEEP_TIME: u64 = 500;
 
+const MAP_WIDTH: usize = 200;
+const MAP_HEIGHT: usize = 40;
+
 fn main() {
     let mut engine = Engine::new();
     let mut interface = Interface::new(engine);
