@@ -21,4 +21,8 @@ impl Ball {
         self.position.x += self.direction.x * SPEED;
         self.position.y += self.direction.y * SPEED;
     }
+
+    pub fn flip(&mut self) {
+        self.direction.y *= -1
+    }
 }
