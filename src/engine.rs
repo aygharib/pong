@@ -29,6 +29,10 @@ impl Engine {
     pub fn update(&mut self) {
         self.ball.update();
 
+        if self.ball_has_scored() {
+            self.ball.reset();
+        }
+
         if self.ball_is_next_to_wall() {
             self.ball.bounce_off_wall();
         }
@@ -59,5 +63,9 @@ impl Engine {
         let r = self.ball.position.x == self.right_paddle.position.x - 1 && (self.ball.position.y >= self.right_paddle.position.y && self.ball.position.y <= (self.right_paddle.position.y + self.right_paddle.height-1));
 
         r || l
+    }
+
+    pub fn ball_has_scored(&self) -> bool {
+        self.ball.position.x == 0 || self.ball.position.x == (MAP_WIDTH as i32)
     }
 }

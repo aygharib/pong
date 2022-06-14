@@ -29,4 +29,10 @@ impl Ball {
     pub fn bounce_off_paddle(&mut self) {
         self.direction.x *= -1
     }
+
+    pub fn reset(&mut self) {
+        self.position.x = 40;
+        self.position.y = 5;
+        self.bounce_off_paddle();
+    }
 }
