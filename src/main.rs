@@ -10,7 +10,7 @@ const MAP_WIDTH: usize = 110;
 const MAP_HEIGHT: usize = 20;
 
 fn main() {
-    let mut engine = Engine::new();
+    let engine = Engine::new();
     let mut interface = Interface::new(engine);
 
     loop {

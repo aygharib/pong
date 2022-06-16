@@ -29,17 +29,16 @@ impl Engine {
         let device_state = DeviceState::new();
         let keys: Vec<Keycode> = device_state.get_keys();
 
-
+        // Handle user input
         if keys.contains(&Keycode::W) {
-            if self.left_paddle.position.y > 0 { // top y is 0
+            if self.left_paddle.position.y > 0 {
                 self.left_paddle.move_up();
             }
-        } else if keys.contains(&Keycode::S) { // bottom y is MAP_HEIGHT
+        } else if keys.contains(&Keycode::S) {
             if self.left_paddle.position.y + self.left_paddle.height < MAP_HEIGHT as i32 {
                 self.left_paddle.move_down();
             }
         }
-
         if keys.contains(&Keycode::Up) {
             if self.right_paddle.position.y > 0 {
                 self.right_paddle.move_up();
@@ -53,7 +52,6 @@ impl Engine {
         // Check ball collisions
         if self.ball_has_scored() {
             self.ball.reset();
-            println!("RESET");
         }
         if self.ball_is_next_to_wall() {
             self.ball.bounce_off_wall();
@@ -64,9 +62,6 @@ impl Engine {
 
         // Move ball
         self.ball.update();
-        println!("UPDATE");
-
-        println!("{}", self.ball_has_scored());
 
         // Clear map
         self.map = [[false; crate::MAP_WIDTH]; crate::MAP_HEIGHT];
