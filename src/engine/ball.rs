@@ -32,7 +32,5 @@ impl Ball {
         self.position.x = (crate::MAP_WIDTH as i32)/2;
         self.position.y = (crate::MAP_HEIGHT as i32)/2;
         self.bounce_off_paddle();
-
-        println!("GOT HERE");
     }
 }
