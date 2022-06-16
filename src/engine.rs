@@ -18,8 +18,8 @@ pub struct Engine {
 impl Engine {
     pub fn new() -> Self {
         Self {
-            left_paddle: Paddle::new(Vector2::new(0, (crate::MAP_HEIGHT/2) as i32), (crate::MAP_HEIGHT/2) as i32),
-            right_paddle: Paddle::new(Vector2::new((crate::MAP_WIDTH-1) as i32, (crate::MAP_HEIGHT/2) as i32), (crate::MAP_HEIGHT/2) as i32),
+            left_paddle: Paddle::new(Vector2::new(1, (crate::MAP_HEIGHT/2) as i32), (crate::MAP_HEIGHT/2) as i32),
+            right_paddle: Paddle::new(Vector2::new((crate::MAP_WIDTH-2) as i32, (crate::MAP_HEIGHT/2) as i32), (crate::MAP_HEIGHT/2) as i32),
             ball: Ball::new(Vector2::new((crate::MAP_WIDTH/2) as i32, (crate::MAP_HEIGHT/2) as i32), Vector2::new(1, -1)),
             map: [[false; crate::MAP_WIDTH]; crate::MAP_HEIGHT],
         }
@@ -29,7 +29,6 @@ impl Engine {
         let device_state = DeviceState::new();
         let keys: Vec<Keycode> = device_state.get_keys();
 
-        println!("{}", self.left_paddle.position.y);
 
         if keys.contains(&Keycode::W) {
             if self.left_paddle.position.y > 0 { // top y is 0
@@ -51,6 +50,24 @@ impl Engine {
             }
         }
 
+        // Check ball collisions
+        if self.ball_has_scored() {
+            self.ball.reset();
+            println!("RESET");
+        }
+        if self.ball_is_next_to_wall() {
+            self.ball.bounce_off_wall();
+        }
+        if self.ball_is_next_to_paddle() {
+            self.ball.bounce_off_paddle();
+        }
+
+        // Move ball
+        self.ball.update();
+        println!("UPDATE");
+
+        println!("{}", self.ball_has_scored());
+
         // Clear map
         self.map = [[false; crate::MAP_WIDTH]; crate::MAP_HEIGHT];
 
@@ -63,19 +80,6 @@ impl Engine {
         }
         self.map[self.ball.position.y as usize][self.ball.position.x as usize] = true;
 
-        // Check ball collisions
-        if self.ball_has_scored() {
-            self.ball.reset();
-        }
-        if self.ball_is_next_to_wall() {
-            self.ball.bounce_off_wall();
-        }
-        if self.ball_is_next_to_paddle() {
-            self.ball.bounce_off_paddle();
-        }
-
-        // Move ball
-        self.ball.update();
     }
 
     pub fn ball_is_next_to_wall(&self) -> bool {
@@ -90,6 +94,6 @@ impl Engine {
     }
 
     pub fn ball_has_scored(&self) -> bool {
-        self.ball.position.x == 0 || self.ball.position.x == (crate::MAP_WIDTH as i32)
+        self.ball.position.x == 0 || self.ball.position.x == (crate::MAP_WIDTH as i32 - 1)
     }
 }
