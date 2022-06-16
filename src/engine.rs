@@ -2,6 +2,8 @@ use self::paddle::Paddle;
 use self::ball::Ball;
 use crate::engine::math::Vector2;
 
+use device_query::{DeviceQuery, DeviceState, Keycode};
+
 mod paddle;
 mod ball;
 mod math;
@@ -24,6 +26,21 @@ impl Engine {
     }
 
     pub fn update(&mut self) {
+        let device_state = DeviceState::new();
+        let keys: Vec<Keycode> = device_state.get_keys();
+
+        if keys.contains(&Keycode::W) {
+            self.left_paddle.move_up();
+        } else if keys.contains(&Keycode::S) {
+            self.left_paddle.move_down();
+        }
+
+        if keys.contains(&Keycode::Up) {
+            self.right_paddle.move_up();
+        } else if keys.contains(&Keycode::Down) {
+            self.right_paddle.move_down();
+        }
+
         // Clear map
         self.map = [[false; crate::MAP_WIDTH]; crate::MAP_HEIGHT];
 

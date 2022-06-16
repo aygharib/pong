@@ -12,4 +12,12 @@ impl Paddle {
             height,
         }
     }
+
+    pub fn move_up(&mut self) {
+        self.position.y -= 1;
+    }
+
+    pub fn move_down(&mut self) {
+        self.position.y += 1;
+    }
 }
