@@ -29,16 +29,26 @@ impl Engine {
         let device_state = DeviceState::new();
         let keys: Vec<Keycode> = device_state.get_keys();
 
+        println!("{}", self.left_paddle.position.y);
+
         if keys.contains(&Keycode::W) {
-            self.left_paddle.move_up();
-        } else if keys.contains(&Keycode::S) {
-            self.left_paddle.move_down();
+            if self.left_paddle.position.y > 0 { // top y is 0
+                self.left_paddle.move_up();
+            }
+        } else if keys.contains(&Keycode::S) { // bottom y is MAP_HEIGHT
+            if self.left_paddle.position.y + self.left_paddle.height < MAP_HEIGHT as i32 {
+                self.left_paddle.move_down();
+            }
         }
 
         if keys.contains(&Keycode::Up) {
-            self.right_paddle.move_up();
+            if self.right_paddle.position.y > 0 {
+                self.right_paddle.move_up();
+            }
         } else if keys.contains(&Keycode::Down) {
-            self.right_paddle.move_down();
+            if self.right_paddle.position.y + self.right_paddle.height < MAP_HEIGHT as i32 {
+                self.right_paddle.move_down();
+            }
         }
 
         // Clear map
