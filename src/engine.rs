@@ -1,6 +1,6 @@
 use self::paddle::Paddle;
 use self::ball::Ball;
-use crate::engine::math::Vector2;
+use crate::{engine::math::Vector2, MAP_HEIGHT};
 
 use device_query::{DeviceQuery, DeviceState, Keycode};
 
@@ -18,8 +18,8 @@ pub struct Engine {
 impl Engine {
     pub fn new() -> Self {
         Self {
-            left_paddle: Paddle::new(Vector2::new(0, (crate::MAP_HEIGHT/2) as i32), 15),
-            right_paddle: Paddle::new(Vector2::new((crate::MAP_WIDTH-1) as i32, (crate::MAP_HEIGHT/2) as i32), 15),
+            left_paddle: Paddle::new(Vector2::new(0, (crate::MAP_HEIGHT/2) as i32), (crate::MAP_HEIGHT/2) as i32),
+            right_paddle: Paddle::new(Vector2::new((crate::MAP_WIDTH-1) as i32, (crate::MAP_HEIGHT/2) as i32), (crate::MAP_HEIGHT/2) as i32),
             ball: Ball::new(Vector2::new((crate::MAP_WIDTH/2) as i32, (crate::MAP_HEIGHT/2) as i32), Vector2::new(1, -1)),
             map: [[false; crate::MAP_WIDTH]; crate::MAP_HEIGHT],
         }

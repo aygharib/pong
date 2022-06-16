@@ -6,8 +6,8 @@ mod engine;
 mod interface;
 
 const SLEEP_TIME: u64 = 100;
-const MAP_WIDTH: usize = 200;
-const MAP_HEIGHT: usize = 40;
+const MAP_WIDTH: usize = 110;
+const MAP_HEIGHT: usize = 20;
 
 fn main() {
     let mut engine = Engine::new();
