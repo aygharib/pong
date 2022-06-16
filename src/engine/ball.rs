@@ -5,15 +5,13 @@ const SPEED: i32 =  1;
 pub struct Ball {
     pub position: Vector2,
     pub direction: Vector2,
-    size: i32,
 }
 
 impl Ball {
-    pub fn new(position: Vector2, direction: Vector2, size: i32) -> Self {
+    pub fn new(position: Vector2, direction: Vector2) -> Self {
         Self {
             position,
             direction,
-            size,
         }
     }
 
